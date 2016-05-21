@@ -1,0 +1,8 @@
+{
+  "name": "count",
+  "description": "A distributed IoT counter.",
+  "runtime": "golang",
+  "memory": 128,
+  "timeout": 5,
+  "defaultEnvironment": "count"
+}
