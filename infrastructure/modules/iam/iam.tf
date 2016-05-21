@@ -1,6 +1,6 @@
 
-resource "aws_iam_role" "count_function" {
-  name = "count_function"
+resource "aws_iam_role" "count" {
+  name = "count"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -19,7 +19,7 @@ EOF
 
 resource "aws_iam_role_policy" "cloudwatchlogs_full_access" {
   name = "cloudwatchlogs_full_access"
-  role = "${aws_iam_role.count_function.id}"
+  role = "${aws_iam_role.count.id}"
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -30,6 +30,25 @@ resource "aws_iam_role_policy" "cloudwatchlogs_full_access" {
       ],
       "Effect": "Allow",
       "Resource": "*"
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "dynamo_access" {
+  name = "dynamo_Access"
+  role = "${aws_iam_role.count.id}"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "dynamodb:UpdateItem"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:dynamodb:us-east-1:618037959815:table/counters"
     }
   ]
 }

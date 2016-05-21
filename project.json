@@ -3,6 +3,10 @@
   "description": "A distributed IoT counter.",
   "runtime": "golang",
   "memory": 128,
-  "timeout": 5,
-  "defaultEnvironment": "count"
+  "timeout": 30,
+  "defaultEnvironment": "count",
+  "environment": {
+    "region": "us-east-1",
+    "counterId": "counter"
+  }
 }
