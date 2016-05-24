@@ -7,6 +7,7 @@
   "defaultEnvironment": "count",
   "environment": {
     "region": "us-east-1",
+    "endpoint": "A1RLCBAJ4YUQ5K.iot.us-east-1.amazonaws.com",
     "counterId": "counter"
   }
 }
