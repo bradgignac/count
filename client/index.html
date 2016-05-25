@@ -7,8 +7,84 @@
     <title>Count</title>
     <meta name="description" content="A distributed IoT counter.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <style>
+      html, body {
+        height: 100%;
+      }
+
+      a, a:hover {
+        text-decoration: none;
+      }
+
+      .counter-container {
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .counter-loading,
+      .counter-content {
+        display: flex;
+        flex-flow: column;
+        flex-grow: 1;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .counter-loading {
+        display: none;
+        color: #999;
+      }
+
+      .counter-value {
+        color: #454545;
+        font-size: 5em;
+      }
+
+      .counter-caption {
+        color: #999;
+        font-size: 1.5em;
+        font-weight: 200;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .counter-footer {
+        padding: 1em 0;
+      }
+
+      body.loading .counter-loading {
+        display: flex;
+      }
+
+      body.loading .counter-content {
+        display: none;
+      }
+    </style>
   </head>
-  <body>
+  <body class="loading">
+    <div class="counter-container">
+      <div class="counter-loading">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="counter-content">
+        <div class="counter-value" id="count"></div>
+        <div class="counter-caption">Clicks</div>
+      </div>
+      <div class="counter-footer">
+        <a href="#"><i class="fa fa-github"></i>&nbsp;&nbsp;GitHub</a>
+      </div>
+    </div>
+
     <script src="count.js"></script>
   </body>
 </html>
