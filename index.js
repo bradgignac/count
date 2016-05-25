@@ -5,11 +5,11 @@ const region = 'us-east-1';
 const pool = 'us-east-1:594b1376-9d0e-4adb-9f91-1a3fae53d247';
 const counterId = 'counter';
 
-let shadow;
+var shadow;
 
 aws.config.region = region;
 aws.config.credentials = new aws.CognitoIdentityCredentials({ IdentityPoolId: pool });
-aws.config.credentials.get((err, data) => {
+aws.config.credentials.get(function (err, data) {
   if (err) {
     return;
   }
@@ -28,18 +28,20 @@ aws.config.credentials.get((err, data) => {
   shadow.on('delta', onShadowDelta);
 });
 
-const onShadowConnected = () => {
+function onShadowConnected() {
   shadow.register(counterId, { persistentSubscribe: true });
-  setTimeout(() => shadow.get(counterId), 1000);
+  setTimeout(function () {
+    shadow.get(counterId);
+  }, 1000);
 };
 
-const onShadowStatus = (name, status, token, data) => {
+function onShadowStatus(name, status, token, data) {
   console.log('Received IoT status update!');
   document.body.classList.remove('loading');
   document.getElementById('count').textContent = data.state.desired.count;
 };
 
-const onShadowDelta = (name, data) => {
+function onShadowDelta(name, data) {
   console.log('Received IoT state delta!');
   document.getElementById('count').textContent = data.state.count;
 };
